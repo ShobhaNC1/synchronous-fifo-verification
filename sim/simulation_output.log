@@ -1,0 +1,46 @@
+=========================================================
+ Synchronous FIFO Verification - Constrained Random Test 
+ DEPTH=16  DATA_WIDTH=8  NUM_RANDOM_TXNS=2000
+=========================================================
+VCD info: dumpfile sync_fifo.vcd opened for output.
+[TEST] Directed: Fill FIFO completely, verify FULL flag
+  PASS: FIFO correctly reports FULL after 16 writes
+[TEST] Directed: Attempt write while FULL (should be rejected)
+  PASS: overflow flag correctly asserted
+[TEST] Directed: Drain FIFO completely, verify EMPTY flag
+  PASS: FIFO correctly reports EMPTY after full drain
+[TEST] Directed: Attempt read while EMPTY (should be rejected)
+  PASS: underflow flag correctly asserted
+[TEST] Directed: Simultaneous read+write in steady state
+  PASS: simultaneous read/write cycles executed
+[TEST] Directed: Simultaneous read+write while FULL
+  PASS: simultaneous read/write while full cycles executed
+[TEST] Constrained-random: 2000 cycles of randomized wr_en/rd_en/data
+[INFO] Entries remaining in reference model at end of test: 3
+=========================================================
+ FUNCTIONAL COVERAGE REPORT
+=========================================================
+  [HIT ] FULL condition hit : 84 hits
+  [HIT ] EMPTY condition hit : 48 hits
+  [HIT ] ALMOST_FULL condition hit : 183 hits
+  [HIT ] ALMOST_EMPTY condition hit : 112 hits
+  [HIT ] Simultaneous R+W (steady state) : 566 hits
+  [HIT ] Simul. R+W, write rejected (FULL) : 25 hits
+  [HIT ] Write rejected (overflow attempt) : 48 hits
+  [HIT ] Read rejected (underflow attempt) : 23 hits
+  [HIT ] Back-to-back writes (>=4 consec.) : 173 hits
+  [HIT ] Back-to-back reads (>=4 consec.) : 161 hits
+---------------------------------------------------------
+ Coverage bins hit: 10 / 10  (100.0%)
+=========================================================
+ SCOREBOARD SUMMARY
+=========================================================
+ Total data checks performed   : 1080
+ Writes accepted                : 1098
+ Reads accepted                 : 1080
+ Overflow (rejected write) evts : 48
+ Underflow (rejected read) evts : 23
+ TOTAL ERRORS                   : 0
+ RESULT: *** ALL CHECKS PASSED ***
+=========================================================
+tb/tb_sync_fifo.v:349: $finish called at 20756000 (1ps)
